@@ -39,9 +39,9 @@ var inputSlot = $(".form-input");
 // RENDER TO PAGE - use .each function to iterate over local storage
 inputSlot.each(function (x) {
   // local storage keys are 8-17 corresponding to the time
+  // meannwhile inputSlot is an array with indexes 0-9 so
+  // must add 8 to x for localStorage
   if (localStorage[x + 8]) {
-    // meannwhile inputSlot is an array with indexes 0-9 so
-    // must add 8 to x for localStorage or go back and change storage keys
     inputSlot[x].append(localStorage[x + 8]);
   }
 });
