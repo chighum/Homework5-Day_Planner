@@ -3,7 +3,7 @@ var today = moment();
 $("#currentDay").text(today.format("MMMM Do, YYYY"));
 
 // add timeblocks 8 am to 5 pm
-// color code the timeblocks by past, present, future
+// COLOR CODE the timeblocks by past, present, future
 // start by using moment to get current time, rounded down to the nearest hour
 var currentTime = parseInt(moment().format("H"));
 
@@ -23,3 +23,25 @@ timeBlockHour.each(function (i) {
 });
 
 // make timeblocks input forms with buttons to save user info to local storage
+// SAVE BUTTON
+$(".saveBtn").on("click", function (event) {
+  var userInput =
+    // Access the input value through DOM traversal from button
+    event.target.parentElement.previousElementSibling.children[0].value;
+  // set the user input to local storage
+  localStorage.setItem(
+    event.target.parentElement.previousElementSibling.previousElementSibling.id,
+    userInput
+  );
+});
+
+var inputSlot = $(".form-input");
+// RENDER TO PAGE - use .each function to iterate over local storage
+inputSlot.each(function (x) {
+  // local storage keys are 8-17 corresponding to the time
+  if (localStorage[x + 8]) {
+    // meannwhile inputSlot is an array with indexes 0-9 so
+    // must add 8 to x for localStorage or go back and change storage keys
+    inputSlot[x].append(localStorage[x + 8]);
+  }
+});
